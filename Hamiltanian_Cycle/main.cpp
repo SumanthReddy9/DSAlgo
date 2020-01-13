@@ -42,7 +42,7 @@ void hamCycle(int g[v][v]){
     path[0] = 0;
     int flag = 0;
     if(hamCycleU(g, flag, path, 1) == false && flag == 0){
-        cout<<"Not possible NIGGA";
+        cout<<"Not possible NIBBA";
     }
 }
 
