@@ -12,7 +12,6 @@ void initVal(){
 }
 
 void goRight(int x, int y, int& temps1, int& temps2, int& temps3, int& temps4, int n){
-    //cout<<"Hello1"<<endl;
     for(int i=0;i<x+1;i++){
         temps1 += arr[i][y];
         temps2 -= arr[i][y];
@@ -24,7 +23,6 @@ void goRight(int x, int y, int& temps1, int& temps2, int& temps3, int& temps4, i
 }
 
 void goLeft(int x, int y, int &temps1, int &temps2, int &temps3, int &temps4, int n){
-    //cout<<"Hello2"<<endl;
     for(int i=0;i<x+1;i++){
         temps1 -= arr[i][y];
         temps2 += arr[i][y];
@@ -36,7 +34,6 @@ void goLeft(int x, int y, int &temps1, int &temps2, int &temps3, int &temps4, in
 }
 
 void goDownL(int x, int y, int &temps1, int &temps2, int &temps3, int &temps4, int n){
-    //cout<<"Hello3"<<endl;
     temps1 += arr[x+1][y];
     for(int i=1;i<n;i++){
         temps2 += arr[x+1][i];
@@ -48,7 +45,6 @@ void goDownL(int x, int y, int &temps1, int &temps2, int &temps3, int &temps4, i
 }
 
 void goDownR(int x, int y, int &temps1, int &temps2, int &temps3, int &temps4, int n){
-    //cout<<"Hello4"<<endl;
     temps2 += arr[x+1][y];
     for(int i=0;i<n-1;i++){
         temps1 += arr[x+1][i];
@@ -88,7 +84,6 @@ int main(){
             if(i + j != 0){
                 if(f == 1){
                     if(r == 0){
-                        //cout<<"Hello1"<<endl;
                         goRight(i, j, temps1, temps2, temps3, temps4, n);
                     }
                     else
@@ -96,7 +91,6 @@ int main(){
                 }
                 else{
                     if(l == 0){
-                        //cout<<"Hello2"<<endl;
                         goLeft(i, n-j-1, temps1, temps2, temps3, temps4, n);
                     }
                     else
@@ -109,7 +103,6 @@ int main(){
                         s4 = temps4;
                 }
             }
-            //cout<<temps1<<" "<<temps2<<" "<<temps3<<" "<<temps4<<endl;
         }
         if(i < n-2){
             if(f == 1){
@@ -129,7 +122,6 @@ int main(){
                 s3 = temps3;
                 s4 = temps4;
         }
-        //cout<<temps1<<" "<<temps2<<" "<<temps3<<" "<<temps4<<endl;
     }
     //cout<<s1<<" "<<s2<<" "<<s3<<" "<<s4<<endl;
     cout<<getabs(s1, s2, s3, s4);
