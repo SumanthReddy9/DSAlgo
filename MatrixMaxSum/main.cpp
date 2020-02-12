@@ -88,7 +88,7 @@ int main(){
             if(i + j != 0){
                 if(f == 1){
                     if(r == 0){
-                        cout<<"Hello1"<<endl;
+                        //cout<<"Hello1"<<endl;
                         goRight(i, j, temps1, temps2, temps3, temps4, n);
                     }
                     else
@@ -96,7 +96,7 @@ int main(){
                 }
                 else{
                     if(l == 0){
-                        cout<<"Hello2"<<endl;
+                        //cout<<"Hello2"<<endl;
                         goLeft(i, n-j-1, temps1, temps2, temps3, temps4, n);
                     }
                     else
@@ -131,5 +131,6 @@ int main(){
         }
         //cout<<temps1<<" "<<temps2<<" "<<temps3<<" "<<temps4<<endl;
     }
+    //cout<<s1<<" "<<s2<<" "<<s3<<" "<<s4<<endl;
     cout<<getabs(s1, s2, s3, s4);
 }
