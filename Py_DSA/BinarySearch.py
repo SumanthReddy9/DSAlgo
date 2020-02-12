@@ -1,14 +1,15 @@
 def bsearch(arr, s, e, val):
     if e >= s:
-        m = (s+e)//2
+        m = (s + e) // 2
         if arr[m] == val:
             return m
         elif arr[m] > val:
-            return bsearch(arr, s, m-1, val)
+            return bsearch(arr, s, m - 1, val)
         else:
-            return bsearch(arr, m+1, e, val)
+            return bsearch(arr, m + 1, e, val)
     else:
         return "-1"
+
 
 if __name__ == "__main__":
     n = int(input())
