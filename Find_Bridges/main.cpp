@@ -6,6 +6,7 @@ int timeVal = 0;
 void dfs(int v, int disc[], int low[], bool vis[], int parent[], int n){
     vis[v] = true;
     disc[v] = low[v] = timeVal++;
+
     for(int i=0;i<n;i++){
         if(arr[v][i] == 1){
             if(!vis[i]){
@@ -13,7 +14,7 @@ void dfs(int v, int disc[], int low[], bool vis[], int parent[], int n){
                 dfs(i, disc, low, vis, parent, n);
                 low[v] = min(low[v], low[i]);
                 if(low[i] > disc[v]){
-                    cout<<i<<"   "<<v<<endl;
+                    cout<<v<<"  "<<i<<endl;
                 }
             }
             else if(parent[v] != i){

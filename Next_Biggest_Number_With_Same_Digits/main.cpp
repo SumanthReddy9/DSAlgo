@@ -50,8 +50,8 @@ void getNext(char str[], int l){
         }
     }
     int sm = i, num = str[i-1];
-    for(j=i+1;j<l;j++){
-        if(str[j] > num && str[j] < str[sm]){
+    for(j = i+1; j<l;j++){
+        if(str[j]> num && str[j] < str[sm]){
             sm = j;
         }
     }
@@ -61,6 +61,6 @@ void getNext(char str[], int l){
 }
 
 int main(){
-    char str[] = "123654";
-    getNext(str, 6);
+    char str[] = "1236544";
+    getNext(str, 7);
 }

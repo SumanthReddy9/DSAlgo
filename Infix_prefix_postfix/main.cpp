@@ -2,12 +2,12 @@
 
 using namespace std;
 
-int prec(char c){
-    if(c == '^')
+int prec(char a){
+    if(a == '^')
         return 3;
-    else if(c == '*' || c == '/')
+    else if(a == '*' || a == '/')
         return 2;
-    else if(c == '-' || c == '+')
+    else if(a == '+' || a == '-')
         return 1;
     else
         return -1;
@@ -15,11 +15,11 @@ int prec(char c){
 
 string infixToPostfix(string str){
     int l = str.length();
-    stack<char> stk;
+    stack<char>stk;
     stk.push('N');
     string ans;
     for(int i=0;i<l;i++){
-        if((str[i] >= 'a' && str[i] <= 'z') ||(str[i] >= 'A' && str[i] <= 'Z')){
+        if((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z')){
             ans += str[i];
         }
         else if(str[i] == '('){
@@ -27,8 +27,7 @@ string infixToPostfix(string str){
         }
         else if(str[i] == ')'){
             while(stk.top() != 'N' && stk.top() != '('){
-                char c = stk.top();
-                ans += c;
+                ans += stk.top();
                 stk.pop();
             }
             if(stk.top() == '('){
@@ -37,9 +36,8 @@ string infixToPostfix(string str){
         }
         else{
             while(stk.top() != 'N' && prec(str[i]) <= prec(stk.top())){
-                char c = stk.top();
+                ans += stk.top();
                 stk.pop();
-                ans += c;
             }
             stk.push(str[i]);
         }
@@ -50,7 +48,6 @@ string infixToPostfix(string str){
     }
     return ans;
 }
-
 string postfixToInfix(string str){
     stack<string> stk;
     int l = str.length();
@@ -84,10 +81,10 @@ string infixToPrefix(string str){
 }
 
 string prefixToPostfix(string str){
-    stack<string> stk;
     int l = str.length();
+    stack<string> stk;
     for(int i=l-1;i>=0;i--){
-        if((str[i] >= 'a' && str[i] <= 'z') ||(str[i] >= 'A' && str[i] <= 'Z')){
+        if((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z')){
             stk.push(string(1, str[i]));
         }
         else{
@@ -95,18 +92,17 @@ string prefixToPostfix(string str){
             stk.pop();
             string op2 = stk.top();
             stk.pop();
-            string temp = op1 + op2 + string(1, str[i]);
-            stk.push(temp);
+            stk.push(op1 + op2 + string(1, str[i]));
         }
     }
     return stk.top();
 }
 
 string postfixToPrefix(string str){
-    stack<string> stk;
     int l = str.length();
+    stack<string> stk;
     for(int i=0;i<l;i++){
-        if((str[i] >= 'a' && str[i] <= 'z') ||(str[i] >= 'A' && str[i] <= 'Z')){
+        if((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z')){
             stk.push(string(1, str[i]));
         }
         else{
@@ -114,8 +110,7 @@ string postfixToPrefix(string str){
             stk.pop();
             string op2 = stk.top();
             stk.pop();
-            string temp = string(1, str[i]) + op2 + op1;
-            stk.push(temp);
+            stk.push(string(1, str[i]) + op2 + op1);
         }
     }
     return stk.top();

@@ -28,7 +28,7 @@ void getPaths(int ax, int ay, int bx, int by){
         for(int i=0;i<4;i++){
             int curx = cur.first + arrx[i];
             int cury = cur.second + arry[i];
-            if(isSafe(curx, cury) && vis[curx][cury] == false){
+            if(isSafe(curx, cury) && !vis[curx][cury]){
                 vis[curx][cury] = true;
                 dis[curx][cury] = dis[cur.first][cur.second] + 1;
                 q.push(make_pair(curx, cury));
@@ -55,6 +55,21 @@ void getPaths(int ax, int ay, int bx, int by){
                 }
             }
         }
+        /*string ans;
+        while(1){
+            if(ax == bx && ay == by){
+                cout<<ans<<endl;
+                break;
+            }
+            for(int i=0;i<4;i++){
+                if(dis[ax][ay] == dis[ax+arrx[i]][ay+arry[i]] + 1 && isSafe(ax+arrx[i], ay+arry[i])){
+                    ans += pat[i];
+                    ax += arrx[i];
+                    ay += arry[i];
+                    break;
+                }
+            }
+        }*/
     }
 }
 

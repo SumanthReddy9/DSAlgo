@@ -2,16 +2,13 @@
 using namespace std;
 
 int steps(int source, int step, int dest){
-    if(source == dest){
+    if(source == dest)
         return step;
-    }
-    if(abs(source) > abs(dest)){
+    if(abs(source) > abs(dest))
         return INT_MAX;
-    }
     int pos = steps(source + step + 1, step + 1, dest);
     int neg = steps(source - step - 1, step + 1, dest);
     return min(pos, neg);
-
 }
 
 int reachTargetOP(int n){
@@ -27,6 +24,6 @@ int reachTargetOP(int n){
 int main(){
     int n;
     cin>>n;
-    //cout<<steps(0, 0, n)<<endl;
-    cout<<reachTargetOP(n);
+    cout<<steps(0, 0, n)<<endl;
+    //cout<<reachTargetOP(n);
 }

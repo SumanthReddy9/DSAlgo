@@ -7,9 +7,9 @@ void addEdge(vector<int> adj[], int x, int y){
 }
 
 int bfs(vector<int> adj[], int l, int n, int src){
-    bool vis[n+1];
+    bool vis[n];
     memset(vis, false, sizeof(vis));
-    queue<int>q;
+    queue<int> q;
     q.push(src);
     int level = 0;
     while(!q.empty()){
@@ -21,11 +21,12 @@ int bfs(vector<int> adj[], int l, int n, int src){
         else{
             for(int i=0;i<s;i++){
                 int cur = q.front();
-                vis[cur] = true;
                 q.pop();
+                vis[cur] = true;
                 for(int j=0;j<adj[cur].size();j++){
-                    if(!vis[adj[cur][j]])
+                    if(!vis[adj[cur][j]]){
                         q.push(adj[cur][j]);
+                    }
                 }
             }
         }

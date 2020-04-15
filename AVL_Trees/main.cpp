@@ -7,9 +7,10 @@ struct node{
     int h;
 };
 
-int height(node* root){
-    if(root == NULL)
+int height(node *root){
+    if(root == NULL){
         return 0;
+    }
     return root->h;
 }
 
@@ -20,22 +21,9 @@ int balence(node* root){
     return (height(root->left) - height(root->right));
 }
 
-node* rightRotate(node* root){
-    node* t1 = root->left;
-    node* t2 = t1->right;
-
-    t1->right = root;
-    root->left = t2;
-
-    root->h = max(height(root->left), height(root->right)) + 1;
-    t1->h = max(height(t1->left), height(t1->right)) + 1;
-
-    return t1;
-}
-
-node* leftRotate(node* root){
-    node* t1 = root->right;
-    node* t2 = t1->left;
+node *leftRotate(node *root){
+    node *t1 = root->right;
+    node *t2 = t1->left;
 
     t1->left = root;
     root->right = t2;
@@ -46,20 +34,34 @@ node* leftRotate(node* root){
     return t1;
 }
 
-node* insertAVL(node* root, int t){
+node *rightRotate(node *root){
+    node *t1 = root->left;
+    node *t2 = t1->right;
+
+    t1->right = root;
+    root->left = t2;
+
+    root->h = max(height(root->left), height(root->right)) + 1;
+    t1->h = max(height(root->left), height(root->right)) + 1;
+
+    return t1;
+}
+
+node *insertAVL(node *root, int t){
     if(root == NULL){
-        node* temp = (node*)malloc(sizeof(node));
+        node *temp = (node*)malloc(sizeof(node));
         temp->data = t;
-        temp->left = temp->right = NULL;
+        temp->left = NULL;
+        temp->right = NULL;
         temp->h = 1;
         root = temp;
         return root;
     }
-    if(t < root->data){
-        root->left = insertAVL(root->left, t);
-    }
-    else if(t > root->data){
+    if(t > root->data){
         root->right = insertAVL(root->right, t);
+    }
+    else if(t < root->data){
+        root->left = insertAVL(root->left, t);
     }
     else{
         return root;

@@ -12,6 +12,7 @@ void getKSizeArrPrint(int arr[], int n, int k, int brr[], int index, int curidx)
     if(index >= n){
         return;
     }
+
     brr[curidx] = arr[index];
     getKSizeArrPrint(arr, n, k, brr, index+1, curidx+1);
     getKSizeArrPrint(arr, n, k, brr, index+1, curidx);

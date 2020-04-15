@@ -1,64 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-void addEdge(vector<int>adj[], int x, int y){
+void addEdge(vector<int> adj[], int x, int y){
     adj[x].push_back(y);
     adj[y].push_back(x);
-}
-
-void BFS(vector<int>adj[], int n, int s){
-    bool vis[n+1];
-    memset(vis, false, sizeof(vis));
-    queue<int>q;
-    q.push(s);
-    vis[s] = true;
-    while(!q.empty()){
-        int cur = q.front();
-        q.pop();
-        cout<<cur<<" ";
-        for(int i=0;i<adj[cur].size();i++){
-            if(!vis[adj[cur][i]]){
-                vis[adj[cur][i]] = true;
-                q.push(adj[cur][i]);
-            }
-        }
-    }
-}
-
-void DFS(vector<int>adj[], int n, int s){
-    bool vis[n+1];
-    memset(vis, false, sizeof(vis));
-    stack<int>stk;
-    stk.push(s);
-    vis[s] = true;
-    while(!stk.empty()){
-        int cur = stk.top();
-        stk.pop();
-        cout<<cur<<" ";
-        for(int i=0;i<adj[cur].size();i++){
-            if(!vis[adj[cur][i]]){
-                vis[adj[cur][i]] = true;
-                stk.push(adj[cur][i]);
-            }
-        }
-    }
-}
-
-void DFSRU(vector<int>adj[], int i, bool vis[]){
-    vis[i] = true;
-    cout<<i<<" ";
-    //vector<int>::iterator itr;
-    for(int j = 0; j<adj[i].size(); j++){
-        if(!vis[adj[i][j]]){
-            DFSRU(adj, adj[i][j], vis);
-        }
-    }
-}
-
-void DFSR(vector<int>adj[], int n, int s){
-    bool vis[n+1];
-    memset(vis, false, sizeof(vis));
-    DFSRU(adj, 1, vis);
 }
 
 void BFSRU(vector<int>adj[], queue<int>&q, bool vis[]){
@@ -88,6 +33,60 @@ void BFSR(vector<int>adj[], int n, int s){
             BFSRU(adj, q, vis);
         }
     }
+}
+
+void BFS(vector<int> adj[], int n, int s){
+    queue<int>q;
+    q.push(s);
+    bool vis[n+1];
+    memset(vis, false, sizeof(vis));
+    vis[s] = true;
+    while(!q.empty()){
+        int cur = q.front();
+        q.pop();
+        cout<<cur<<" ";
+        for(int i = 0; i < adj[cur].size(); i++){
+            if(!vis[adj[cur][i]]){
+                vis[adj[cur][i]] = true;
+                q.push(adj[cur][i]);
+            }
+        }
+    }
+}
+
+void DFS(vector<int> adj[], int n, int s){
+    stack<int>stk;
+    bool vis[n+1];
+    memset(vis, false, sizeof(vis));
+    stk.push(s);
+    vis[s] = true;
+    while(!stk.empty()){
+        int cur = stk.top();
+        stk.pop();
+        cout<<cur<<" ";
+        for(int i = 0; i < adj[cur].size(); i++){
+            if(!vis[adj[cur][i]]){
+                vis[adj[cur][i]] = true;
+                stk.push(adj[cur][i]);
+            }
+        }
+    }
+}
+
+void DFSRU(vector<int> adj[], int n, int s, bool vis[]){
+    vis[s] = true;
+    cout<<s<<" ";
+    for(int i=0 ;i<adj[s].size(); i++){
+        if(!vis[adj[s][i]]){
+            DFSRU(adj, n, adj[s][i], vis);
+        }
+    }
+}
+
+void DFSR(vector<int> adj[], int n, int s){
+    bool vis[n+1];
+    memset(vis, false, sizeof(vis));
+    DFSRU(adj, n, s, vis);
 }
 
 int main(){

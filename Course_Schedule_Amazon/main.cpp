@@ -12,12 +12,13 @@ There are a total of 2 courses to take. To take course 1 you should have finishe
 #include<bits/stdc++.h>
 using namespace std;
 
+
 bool dfs(vector<int> g[], vector<int> &vis, int i){
-    if(vis[i] == 1)
+    if(vis[i] == 1){
         return true;
+    }
     vis[i] = -1;
-    //vector<int>:: iterator j;
-    for(int j=0; j < g[i].size(); j++){
+    for(int j=0;j<g[i].size(); j++){
         if(vis[g[i][j]] == -1 || !dfs(g, vis, g[i][j]))
             return false;
     }
@@ -32,14 +33,16 @@ bool canPass(vector<pair<int, int> >&adj, int n, int m){
     for(int i=0;i<m;i++){
         g[adj[i].second].push_back(adj[i].first);
     }
+    /*
     vector<int>:: iterator j;
-    /*for(int i=0;i<n;i++){
+    for(int i=0;i<n;i++){
         cout<<i<<" ";
         for(j=g[i].begin(); j!=g[i].end();j++){
             cout<<*j<<" ";
         }
         cout<<endl;
     }*/
+
     for(int i=0;i<n;i++){
         if(!dfs(g, vis, i))
             return false;

@@ -15,7 +15,7 @@ public:
     }
 };
 
-pair<int, int> maxSumHelper(Node *root){
+/*pair<int, int> maxSumHelper(Node *root){
     if(root == NULL){
         pair<int, int> res(0, 0);
         return res;
@@ -25,6 +25,20 @@ pair<int, int> maxSumHelper(Node *root){
     pair<int, int> res;
     res.first = res1.second + res2.second + root->data;
     res.second = max(res1.first, res1.second) + max(res2.first, res2.second);
+    cout<<res.first<<"   "<<res.second<<endl;
+    return res;
+}*/
+
+pair<int, int> maxSumHelper(Node *root){
+    if(root == NULL){
+        pair<int, int>res(0, 0);
+        return res;
+    }
+    pair<int, int> res1 = maxSumHelper(root->left);
+    pair<int, int> res2 = maxSumHelper(root->right);
+    pair<int, int> res;
+    res.first = root->data + res1.second + res2.second;
+    res.second = max(res1.first, res1.second) + max(res2.second, res2.first);
     return res;
 }
 

@@ -22,9 +22,10 @@ void insertIntoLL(struct node** LL, int data){
     }
 }
 
+
 node* reverseLL(struct node* LL){
-    struct node *prevNode = NULL, *nextNode = NULL;
-    struct node *cur = LL;
+    struct node* prevNode = NULL, *nextNode = NULL;
+    struct node* cur = LL;
     while(cur != NULL){
         nextNode = cur->next;
         cur->next = prevNode;

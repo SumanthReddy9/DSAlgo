@@ -2,18 +2,18 @@
 using namespace std;
 int ch[100][100];
 
-bool isSafe(int n, int row, int col){
-    for(int i=0;i<n;i++){
+bool isSafe(int n, int col, int row){
+    for(int i=0; i<n; i++){
         if(ch[row][i] == 1){
             return false;
         }
     }
-    for(int i=row, j=col; i>=0, j>=0; i--, j--){
+    for(int i=row, j = col; i >= 0, j >= 0; i--, j--){
         if(ch[i][j] == 1){
             return false;
         }
     }
-    for(int i=row, j=col; i<n, j>=0; i++, j--){
+    for(int i = row, j = col; i < n, j >= 0; i++, j--){
         if(ch[i][j] == 1){
             return false;
         }
@@ -26,7 +26,7 @@ bool placeQueens(int n, int col){
         return true;
     }
     for(int i=0;i<n;i++){
-        if(isSafe(n, i, col)){
+        if(isSafe(n, col, i)){
             ch[i][col] = 1;
             if(placeQueens(n, col+1)){
                 for(int x=0;x<n;x++){
@@ -43,7 +43,6 @@ bool placeQueens(int n, int col){
     }
     return false;
 }
-
 int main(){
     int n;
     cin>>n;

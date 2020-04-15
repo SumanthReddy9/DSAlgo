@@ -9,15 +9,9 @@ int root(int x, int idx[]){
     return x;
 }
 
-void union1(int x, int y, int sizeArr[], int idx[]){
-    if(sizeArr[x] > sizeArr[y]){
-        idx[y] = idx[x];
-        sizeArr[x] += sizeArr[y];
-    }
-    else{
-        idx[x] = idx[y];
-        sizeArr[x] += sizeArr[y];
-    }
+
+void union1(int x, int y, int idx[]){
+    idx[root(x, idx)] = idx[root(y, idx)];
 }
 
 int main(){
@@ -42,20 +36,19 @@ int main(){
     }
     sort(v.begin(), v.end());
 
-    /*cout<<v.size()<<endl;
+    cout<<v.size()<<endl;
     for(int i=0;i<2*n-2;i++){
         cout<<v[i].first<<" "<<v[i].second.first<<" "<<v[i].second.second<<endl;
-    }*/
-    int idx[n], sizeArr[n];
+    }
+    int idx[n];
     for(int i=0;i<n;i++){
         idx[i] = i;
-        sizeArr[i] = 1;
     }
     int ans = 0;
     for(int i=0;i<2*n-2;i++){
         if(root(v[i].second.first , idx) != root(v[i].second.second, idx)){
             ans += v[i].first;
-            union1(v[i].second.first, v[i].second.second, sizeArr, idx);
+            union1(v[i].second.first, v[i].second.second, idx);
         }
     }
     cout<<ans<<endl;

@@ -2,63 +2,12 @@
 #define v 9
 using namespace std;
 
-/*int minIndex(int dist[], bool sptSet[]){
-    int minVal = INT_MAX, min_index;
-    for(int i=0;i<v;i++){
-        if(sptSet[i] == false && dist[i] <= minVal){
-            min_index = i;
-            minVal = dist[i];
-        }
-    }
-    cout<<min_index<<endl;
-    return min_index;
-}
-
-
-void dijkstra(int adj[][v], int src){
-    int dist[v];
-    bool sptSet[v];
-    memset(sptSet, false, sizeof(sptSet));
-    for(int i=0;i<v;i++)
-        dist[i] = INT_MAX;
-    dist[src] = 0;
-    vector<int>path[v];
-    int pred[v];
-    pred[src] = -1;
-    for(int c=0;c<v;c++){
-        int u = minIndex(dist, sptSet);
-        sptSet[u] = true;
-        for(int i=0;i<v;i++){
-            if(!sptSet[i] && dist[u] != INT_MAX && adj[u][i] && dist[i] > dist[u] + adj[u][i]){
-                pred[i] = u;
-                dist[i] = dist[u] + adj[u][i];
-            }
-        }
-    }
-    for(int i=1;i<v;i++){
-        int d = i;
-        while(pred[d] != -1){
-            path[i].push_back(d);
-            d = pred[d];
-        }
-        cout<<"0"<<" ";
-        for(int j=path[i].size()-1;j>=0;j--){
-            cout<<path[i][j]<<" ";
-        }
-    cout<<endl;
-    }
-
-    for(int i=0;i<v;i++){
-        cout<<i<<"---->"<<dist[i]<<endl;
-    }
-}*/
-
 int getminidx(int dist[], bool vis[]){
-    int minval = INT_MAX, minidx;
+    int minidx, minVal = INT_MAX;
     for(int i=0;i<v;i++){
-        if(vis[i] == false && dist[i] <= minval){
-            minval = dist[i];
+        if(!vis[i] && dist[i] <= minVal){
             minidx = i;
+            minVal = dist[i];
         }
     }
     return minidx;
@@ -66,37 +15,39 @@ int getminidx(int dist[], bool vis[]){
 
 void dijkstra(int adj[v][v], int src){
     bool vis[v];
-    int pred[v], dist[v];
     memset(vis, false, sizeof(vis));
+    int pred[v], dist[v];
     pred[src] = -1;
     for(int i=0;i<v;i++)
         dist[i] = INT_MAX;
     dist[src] = 0;
-    vector<int>path[v];
-    for(int c=0;c<v;c++){
-        int minidx = getminidx(dist, vis);
-        vis[minidx] = true;
+    vector<int> path[v];
+    int c = v;
+    while(c--){
+        int minIdx = getminidx(dist, vis);
+        vis[minIdx] = true;
         for(int i=0;i<v;i++){
-            if(adj[minidx][i] && dist[minidx] != INT_MAX && dist[i] > dist[minidx] + adj[minidx][i] && !vis[i]){
-                dist[i] = dist[minidx] + adj[minidx][i];
-                pred[i] = minidx;
+            if(adj[minIdx][i] && dist[minIdx] != INT_MAX && dist[i] > dist[minIdx] + adj[minIdx][i] && !vis[i]){
+                dist[i] = dist[minIdx] + adj[minIdx][i];
+                pred[i] = minIdx;
             }
         }
     }
-    for(int i=1;i<v;i++){
+    for(int i=0;i<v;i++){
         int crawl = i;
         while(pred[crawl] != -1){
             path[i].push_back(crawl);
             crawl = pred[crawl];
         }
         cout<<src<<" ";
-        for(int j=path[i].size()-1;j>=0;j--){
+        for(int j=path[i].size()-1; j >= 0; j--){
             cout<<path[i][j]<<" ";
         }
-        cout<<"----->"<<dist[i];
+        cout<<"------>"<<dist[i];
         cout<<endl;
     }
 }
+
 int main(){
     int e;
     cin>>e;

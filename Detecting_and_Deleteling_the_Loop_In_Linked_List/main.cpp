@@ -22,6 +22,26 @@ void insertIntoLL(struct node** LL, int data){
     }
 }
 
+/*void removeLoop(struct node* head){
+    struct node *slow = head, *fast = head;
+    while(slow && fast && fast->next){
+        slow = slow->next;
+        fast = fast->next->next;
+        if(slow == fast){
+            break;
+        }
+    }
+    if(slow == fast){
+        slow = head;
+        while(slow->next != fast->next){
+            slow = slow->next;
+            fast = fast->next;
+        }
+        cout<<fast->next->data<<endl;
+        fast->next = NULL;
+    }
+}*/
+
 void removeLoop(struct node* head){
     struct node *slow = head, *fast = head;
     while(slow && fast && fast->next){

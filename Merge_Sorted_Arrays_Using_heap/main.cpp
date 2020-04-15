@@ -38,8 +38,7 @@ void getArr(int arr[][100], int ans[], int n, int k){
         heap[i].nextidx = 1;
     }
     heapit(heap, k);
-
-    for(int i=0;i<n*k;i++){
+    for(int i=0; i<n*k;i++){
         HeapData cur = heap[0];
         ans[i] = cur.ele;
         if(cur.nextidx < n){
@@ -53,7 +52,7 @@ void getArr(int arr[][100], int ans[], int n, int k){
         heapify(heap, 0, k);
     }
     for(int i=0;i<n*k;i++){
-        cout<<ans[i]<<" ";
+        cout<<ans[i]<<"  ";
     }
 }
 

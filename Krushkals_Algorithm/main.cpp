@@ -2,29 +2,24 @@
 using namespace std;
 
 int root(int x, int idx[]){
+    int ans = 0;
     while(idx[x] != x){
         idx[x] = idx[idx[x]];
         x = idx[x];
     }
-    return x;
 }
 
 void union1(int x, int y, int idx[]){
-    int root_x = root(x, idx);
-    int root_y = root(y, idx);
-    idx[root_x] = idx[root_y];
+    idx[root(x, idx)] = idx[root(y, idx)];
 }
 
 void KrushkalMST(vector<pair<int, pair<int, int> > >adj, int v, int e, int idx[]){
     int cost = 0;
     for(int i=0;i<e;i++){
-        int x = adj[i].second.first;
-        int y = adj[i].second.second;
-        int c = adj[i].first;
-        if(root(x, idx) != root(y, idx)){
-            cout<<x<<" "<<y<<endl;
-            cost += c;
-            union1(x, y, idx);
+        if(root(adj[i].second.first, idx) != root(adj[i].second.second, idx)){
+            cout<<adj[i].second.first<<" <-----> "<<adj[i].second.second<<endl;
+            cost += adj[i].first;
+            union1(adj[i].second.first, adj[i].second.second, idx);
         }
     }
     cout<<cost;

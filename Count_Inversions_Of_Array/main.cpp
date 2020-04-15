@@ -36,7 +36,11 @@ int getCount(int arr[], int n){
     for(int i=n-1;i>=0;i--){
         ans += sumUp(BIT, arr[i]-1);
         update(BIT, arr[i], maxEle, 1);
+        for(int i=0;i<= maxEle; i++)
+            cout<<BIT[i]<<" ";
+        cout<<endl;
     }
+
     return ans;
 }
 

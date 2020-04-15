@@ -9,21 +9,6 @@ int distance(int sx,int sy,int dx,int dy) {
 	return (xd+yd);
 }
 
-/*void cal(int sx,int sy,int dx,int dy,int dis) {
-
-	ans=min(ans,distance(sx,sy,dx,dy)+dis);
-
-	for(int i=0;i<n;i++) {
-		if(mask[i]==0) {
-			mask[i]=1;
-			int temp=distance(sx,sy,w[i][0],w[i][1])+dis+w[i][4];
-			cal(w[i][2],w[i][3],dx,dy,temp);
-			temp=distance(sx,sy,w[i][2],w[i][3])+dis+w[i][4];
-			cal(w[i][0],w[i][1],dx,dy,temp);
-			mask[i]=0;
-		}
-	}
-}*/
 void cal(int sx, int sy, int dx, int dy, int dis){
     ans = min(ans, distance(sx, sy, dx, dy) + dis);
     for(int i=0;i<n;i++){
