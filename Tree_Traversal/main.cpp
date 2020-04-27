@@ -6,11 +6,12 @@ struct Node{
     struct Node *left, *right, *lbro;
 };
 
-void ConstructBinaryTree(struct Node** root, int *data){
-    struct Node* temp = (struct Node*)malloc(sizeof(struct Node));
-    temp->data = *data;
-    temp->left = temp->right = NULL;
+void ConstructBinaryTree(struct Node **root, int *data){
     if(*root == NULL){
+        Node *temp = (struct Node*)malloc(sizeof(struct Node));
+        temp->data = *data;
+        temp->left = NULL;
+        temp->right = NULL;
         *root = temp;
     }
     else{
@@ -56,7 +57,13 @@ void inOrder(struct Node *root){
     }
 }
 
-int height(struct Node* root){
+int height(struct Node *root){
+    if(root == NULL)
+        return 0;
+    return 1 + max(height(root->left), height(root->right));
+}
+
+/*int height(struct Node* root){
     if(root == NULL){
         return 0;
     }
@@ -68,7 +75,7 @@ int height(struct Node* root){
     else{
         return 1+rheight;
     }
-}
+}*/
 
 int countNodes(struct Node* root){
     if(root == NULL){
@@ -78,6 +85,22 @@ int countNodes(struct Node* root){
 }
 
 void levelOrder(struct Node *root){
+    if(root == NULL)
+        return;
+    queue<Node*> q;
+    q.push(root);
+    while(!q.empty()){
+        Node *top = q.front();
+        q.pop();
+        cout<<top->data<<" ";
+        if(top->left != NULL)
+            q.push(top->left);
+        if(top->right != NULL)
+            q.push(top->right);
+    }
+}
+
+/*void levelOrder(struct Node *root){
     if(root == NULL)
         return;
     queue<Node*>q;
@@ -91,6 +114,39 @@ void levelOrder(struct Node *root){
         }
         if(top->right != NULL){
             q.push(top->right);
+        }
+    }
+}*/
+
+void printZigZagOn(struct Node *root){
+    if(root == NULL)
+        return;
+    stack<Node*> s1;
+    stack<Node*> s2;
+
+    s1.push(root);
+    while(!s1.empty() || !s2.empty()){
+        while(!s1.empty()){
+            Node *top = s1.top();
+            s1.pop();
+            cout<<top->data<<" ";
+            if(top->left != NULL){
+                s2.push(top->left);
+            }
+            if(top->right != NULL){
+                s2.push(top->right);
+            }
+        }
+        while(!s2.empty()){
+            Node *top = s2.top();
+            s2.pop();
+            cout<<top->data<<" ";
+            if(top->right != NULL){
+                s1.push(top->right);
+            }
+            if(top->left != NULL){
+                s1.push(top->left);
+            }
         }
     }
 }
@@ -122,7 +178,7 @@ void printZigZag(struct Node *root, int h){
     }
 }
 
-void printZigZagOn(struct Node* root){
+/*void printZigZagOn(struct Node* root){
     if(root == NULL)
         return;
     stack<Node*>q1;
@@ -148,9 +204,38 @@ void printZigZagOn(struct Node* root){
                 q1.push(top->left);
         }
     }
+}*/
+
+void makeBro(Node *root){
+    if(root == NULL)
+        return;
+
+    queue<Node*> q;
+    q.push(root);
+    Node *prev = NULL;
+
+    while(!q.empty()){
+        int s = q.size();
+        for(int i=0;i<s;i++){
+            Node *top = q.front();
+            q.pop();
+            if(i == 0){
+                top->lbro = NULL;
+                prev = top;
+            }
+            else{
+                top->lbro = prev;
+                prev = top;
+            }
+            if(top->left != NULL)
+                q.push(top->left);
+            if(top->right != NULL)
+                q.push(top->right);
+        }
+    }
 }
 
-void makeBro(Node* root){
+/*void makeBro(Node* root){
     if(root == NULL)
         return;
     queue<Node*>q;
@@ -177,7 +262,7 @@ void makeBro(Node* root){
             }
         }
     }
-}
+}*/
 
 void printSib(Node *root){
     if(root == NULL)

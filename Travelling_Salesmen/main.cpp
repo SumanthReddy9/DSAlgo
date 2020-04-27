@@ -90,6 +90,20 @@ void hamCycle(){
         cout<<ans<<endl;
 }
 
+/*void tsp(vector<bool>&vis, int curPos, int curNum, int cost, int &ans){
+    if(curNum == v && g[curPos][0]){
+        ans = min(ans, cost + g[curPos][0]);
+        return;
+    }
+    for(int i=0;i<v;i++){
+        if(!vis[i] && g[curPos][i]){
+            vis[i] = true;
+            tsp(vis, i, curNum+1, cost + g[curPos][i], ans);
+            vis[i] = false;
+        }
+    }
+}*/
+
 void tsp(vector<bool>&vis, int curPos, int curNum, int cost, int &ans){
     if(curNum == v && g[curPos][0]){
         ans = min(ans, cost + g[curPos][0]);
@@ -103,6 +117,7 @@ void tsp(vector<bool>&vis, int curPos, int curNum, int cost, int &ans){
         }
     }
 }
+
 int cost = INT_MAX;
 
 int tspDP(int mask, int pos){
